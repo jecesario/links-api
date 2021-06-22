@@ -31,7 +31,7 @@ public class User {
 	private String password;
 
 	private int type;
-	
+
 	@OneToMany(mappedBy = "user")
 	private List<Page> pages = new ArrayList<>();
 
@@ -40,14 +40,15 @@ public class User {
 	}
 
 	public User(long id, @NotBlank(message = "O campo nome deve ser preenchido") String name,
-			@NotBlank(message = "O campo email deve ser preenchido") String email,
-			@NotBlank(message = "O campo senha deve ser preenchido") String password, int type) {
+			@NotBlank(message = "O campo email deve ser preenchido") @UniqueElements String email,
+			@NotBlank(message = "O campo senha deve ser preenchido") String password, int type, List<Page> pages) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.password = password;
 		this.type = type;
+		this.pages = pages;
 	}
 
 	public long getId() {
@@ -88,6 +89,14 @@ public class User {
 
 	public void setType(int type) {
 		this.type = type;
+	}
+
+	public List<Page> getPages() {
+		return pages;
+	}
+
+	public void setPages(List<Page> pages) {
+		this.pages = pages;
 	}
 
 }
